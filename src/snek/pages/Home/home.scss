@@ -1,0 +1,45 @@
+@import '../../../common/css/colors.scss';
+
+.App-logo {
+  height: 20vh;
+  margin: 0 auto 0 auto;
+  pointer-events: none;
+  fill: white;
+}
+
+h1 {
+  color: white;
+}
+
+.content {
+  text-align: center;
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -10vh;
+    margin-top: -10vh;
+  }
+
+  .text {
+    font-family: 'Roboto';
+    font-size: 5vh;
+    position: absolute;
+    display: inline-block;
+    top: 66%;
+    transform: translate(-50%, 0);
+  }
+
+  .footer-text {
+    font-size: 1.5vh;
+    position: absolute;
+    display: inline-block;
+    bottom: 1%;
+    transform: translate(-50%, 0);
+
+    a {
+      color: $snekGreen;
+    }
+  }
+}
