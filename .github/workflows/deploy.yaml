@@ -11,7 +11,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
       # https://help.github.com/en/articles/virtual-environments-for-github-actions#default-environment-variables
       # https://github.com/actions/checkout
       - name: Checkout 🛎️
@@ -51,7 +50,7 @@ jobs:
             git add .env.local
 
             # Adjust CNAME
-            domain="${GITHUB_REPOSITORY#*/}.${GITHUB_ACTOR}.snek.at"
+            domain="${GITHUB_REPOSITORY#*/}.${GITHUB_REPOSITORY%*/}.snek.at"
             echo ${domain} > public/CNAME
             git add public/CNAME
             
