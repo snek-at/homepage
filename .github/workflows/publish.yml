@@ -55,7 +55,8 @@ jobs:
           git rm -rf .
 
           # Create `jaen-data.json`
-          echo '${{ toJson(github.event.client_payload) }}' > jaen-data.json
+          json_payload = ${{ toJson(github.event.client_payload) }}
+          echo $json_payload > jaen-data.json
 
           # reveal what `jaen-data.json` looks like in the logs
           cat jaen-data.json
