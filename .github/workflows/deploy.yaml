@@ -50,8 +50,9 @@ jobs:
             git add .env.local
 
             # Adjust CNAME
+            domainOld="jaen-template.snek-at.snek.at"
             domain="${GITHUB_REPOSITORY#*/}.${GITHUB_REPOSITORY%*/}.snek.at"
-            echo ${domain} > public/CNAME
+            sed -i "s|$domainOld|$domain|g" public/CNAME
             git add public/CNAME
             
             # Adjust package.json
