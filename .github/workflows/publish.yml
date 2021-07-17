@@ -18,7 +18,10 @@ jobs:
   publish:
     # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-latest
-
+    
+    env:
+      JAEN_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+  
     # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idsteps
     steps:
       # https://help.github.com/en/articles/virtual-environments-for-github-actions#default-environment-variables
@@ -44,8 +47,7 @@ jobs:
 
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Update jaen-data.json
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github.event.client_payload) }}
+
         # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
         run: |
 
@@ -57,7 +59,7 @@ jobs:
 
           # Create `jaen-data.json`
 
-          echo $GITHUB_CONTEXT > jaen-data.json
+          echo $JAEN_PAYLOAD > jaen-data.json
 
           # reveal what `jaen-data.json` looks like in the logs
           cat jaen-data.json
@@ -84,7 +86,7 @@ jobs:
           fi
 
           # Create `jaen-data.json`
-          echo '${{ toJson(github.event.client_payload) }}' > jaen-data.json
+          echo $JAEN_PAYLOAD > jaen-data.json
 
           # Git: add, commit, and push changes
           git add .
