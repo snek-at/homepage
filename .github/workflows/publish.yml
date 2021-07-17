@@ -44,7 +44,8 @@ jobs:
 
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Update jaen-data.json
-
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event.client_payload) }}
         # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
         run: |
 
@@ -55,8 +56,8 @@ jobs:
           git rm -rf .
 
           # Create `jaen-data.json`
-          json_payload = ${{ toJson(github.event.client_payload) }}
-          echo $json_payload > jaen-data.json
+
+          echo $GITHUB_CONTEXT > jaen-data.json
 
           # reveal what `jaen-data.json` looks like in the logs
           cat jaen-data.json
