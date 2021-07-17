@@ -12,14 +12,14 @@ import {CMSProvider} from '@snek-at/jaen'
 import '~/common/css/base.scss'
 
 import {HomePage} from './snek/pages'
-import ImprintPage from './snek/pages/Imprint'
+import TextPage from './snek/pages/Text'
 
 const App: React.FC = () => {
   return (
     <div style={{margin: 150}}>
       <CMSProvider
         settings={{gitRemote: process.env.REACT_APP_JAEN_GIT_REMOTE}}
-        pages={[HomePage, ImprintPage]}></CMSProvider>
+        pages={[HomePage, TextPage]}></CMSProvider>
     </div>
   )
 }

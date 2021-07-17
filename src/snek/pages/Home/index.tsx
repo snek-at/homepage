@@ -13,7 +13,7 @@ import {ReactComponent as SnekSvg} from '~/common/snek-logo.svg'
 
 import Boop from '~/components/Boop'
 
-import ImprintPage from '../Imprint'
+import TextPage from '../Text'
 import './home.scss'
 
 const HomePage: ConnectedPageType = () => {
@@ -31,13 +31,13 @@ const HomePage: ConnectedPageType = () => {
 
       <div className="footer-text">
         <TextField name="footer-text" />
-        <a href="/impressum">Impressum</a>
+        <a href="/legal-notice">legal notice</a>
       </div>
     </div>
   )
 }
 
 HomePage.PageType = 'HomePage'
-HomePage.ChildPages = [ImprintPage]
+HomePage.ChildPages = [TextPage]
 
 export default HomePage

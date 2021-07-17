@@ -12,7 +12,7 @@ import {
   SimpleRichTextField as RichTextField
 } from '@snek-at/jaen'
 
-const ImprintPage: ConnectedPageType = () => {
+const TextPage: ConnectedPageType = () => {
   return (
     <>
       <RichTextField name="content" />
@@ -20,7 +20,7 @@ const ImprintPage: ConnectedPageType = () => {
   )
 }
 
-ImprintPage.PageType = 'ImprintPage'
-ImprintPage.ChildPages = []
+TextPage.PageType = 'TextPage'
+TextPage.ChildPages = []
 
-export default ImprintPage
+export default TextPage
