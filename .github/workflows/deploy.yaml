@@ -35,23 +35,20 @@ jobs:
           # Git: set remote
           # https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#http-based-git-access-by-an-installation
           git remote set-url origin "https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git"
-
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Add Jaen data 🔧
         run: |
           if [[ -z $(git ls-remote --heads origin jaen-storage) ]]; then
             echo "There is no Jaen data deployed"
             echo "Configure Jaen gitRemote"
-
             # Adjust Jaen env
             gitRemoteTemplate="snek-at/jaen-template"
             envLocalAdjusted="${envLocal/$gitRemoteTemplate/$GITHUB_REPOSITORY}"
             sed -i "s|$gitRemoteTemplate|$GITHUB_REPOSITORY|g" .env.local
             git add .env.local
-
             # Adjust CNAME
             domainOld="jaen-template.snek-at.snek.at"
-            domain="${GITHUB_REPOSITORY#*/}.${GITHUB_REPOSITORY%*/}.snek.at"
+            domain="${GITHUB_REPOSITORY#*/}.${GITHUB_REPOSITORY%/*}.snek.at"
             sed -i "s|$domainOld|$domain|g" public/CNAME
             git add public/CNAME
             
@@ -66,11 +63,9 @@ jobs:
             sed -i "s|$repositoryOld|$repository|g" package.json
             sed -i "s|$bugsurlOld|$bugsurl|g" package.json
             git add package.json
-
             # Git: commit, and push changes
-            git commit -m "Configure Jaen gitRemote" || echo "Nothing to commit, working tree clean."
+            git commit -m "deploy(package.json): configure Jaen gitRemote" || echo "Nothing to commit, working tree clean."
             GIT_TRACE=1 git push -f --verbose origin main
-
             echo "Create jaen-storage branch"
             # Create jean-storage branch without history
             git checkout --orphan jaen-storage
@@ -82,20 +77,18 @@ jobs:
             cat jaen-data.json
             # Git: add, commit, and push changes
             git add jaen-data.json
-            git commit -m "Update jaen-data.json" || echo "Nothing to commit, working tree clean."
+            git commit -m "deploy(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
             GIT_TRACE=1 git push -f --verbose origin jaen-storage
-
             # Create gh-pages branch without history
             git checkout --orphan gh-pages
             echo '' > jaen-data.json
             git add jaen-data.json
-            git commit -m "Update jaen-data.json" || echo "Nothing to commit, working tree clean."
+            git commit -m "deploy(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
             GIT_TRACE=1 git push -f --verbose origin gh-pages
           else
             # Jaen is already configured"
             echo "Jaen has already been initialized"
           fi
-
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Install and Build 🔧
         run: |

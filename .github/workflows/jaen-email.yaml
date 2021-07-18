@@ -5,7 +5,7 @@
 # in the LICENSE file at https://snek.at/license
 
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#name
-name: Publish
+name: Jaen Email
 
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#on
 on:
@@ -15,7 +15,7 @@ on:
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobs
 jobs:
   # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_id
-  publish:
+  jaen-email:
     # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-latest
 
